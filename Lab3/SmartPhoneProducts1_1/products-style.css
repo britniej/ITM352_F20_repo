@@ -1,0 +1,39 @@
+	/* General */  
+body {
+    width: 800px;
+    margin: 0 auto;
+}
+
+main {
+    display: flex;
+	flex-flow: row wrap;
+    justify-content: space-around;
+    background-image: url(./phone_globe.png) no repeat 70% center;
+}
+
+.item img {
+    width: 200px;   
+    height: 200px;
+}
+.rotate img
+{
+  animation: rotation .3s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+/* Typography */
+h1, h2 {
+    text-align: center;
+}
+    /* block styling */  
+body > div {
+    border: 5px solid black;
+    display: flex;
+}
