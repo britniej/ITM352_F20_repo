@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <script>
+            var first_name = 'Britnie';
+            var table_str = 
+        `<tr><th>Line</th><th>Name</th></tr>
+        <tr><td>1.</td><td>${first_name}</td></tr>
+        <tr><td>2.</td>${first_name}<td><br />
+                            &lt;first_name&gt;</td></tr>
+        <tr><td>3.</td><td>\n${first_name}</td></tr>
+        <tr><td>4.</td><td>'\n${first_name}'</td></tr>
+        <tr><td>5.</td><td>"\n${first_name}"</td></tr>`;
+        document.write(table_str);
+    </script>
+        </table>
+    
+    
+</body>
+</html>
