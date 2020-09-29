@@ -1,50 +1,51 @@
-<script>
-/* Products and prices table for new store */
-// Product Data
+<script>/* Products price breakdown */
+//Product Data
 
 // Product 1
-var item1 = 'Gillette Sensor 3 Razor';
+     var item1 = 'Gillette Sensor 3 Razor';
      var quantity1 = 2;
      var price1 = 1.23;
 
      // Product 2
      var item2 = 'Barbasol Shaving Cream';
      var quantity2 = 1;
-     var price3 = 2.05;
+     var price2 = 2.30;
 
      // Product 3
      var item3 = 'Nautica Cologne';
      var quantity3 = 1;
-     var price3 = 21.01;
+     var price3 = 4.20;
 
      // Product 4
      var item4 = 'Rubbing Alcohol';
      var quantity4 = 3;
-     var price4 = 3.45;
+     var price4 = 0.95;
 
      // Product 5
      var item5 = 'Colgate Classic Toothbrush';
      var quantity5 = 12;
-     var price5 = 3.04;
+     var price5 = 3.05;
 
      // Compute extended prices
-var extended_price1 = quantity1*price1;
-var extended_price2 = quantity2*price2;
-var extended_price3 = quantity3*price3;
-var extended_price4 = quantity4*price4;
-var extended_price5 = quantity5*price5;
+     var extended_price1 = quantity1*quantity1;
+     var extended_price2 = quantity2*quantity2;
+     var extended_price3 = quantity3*quantity3;
+     var extended_price4 = quantity4*quantity4;
+     var extended_price5 = quantity5*quantity5;
 
-// Compute sub-total 
-var subtotal = extended_price1 + extended_price2 + extended_price3 + extended_price4 + extended_price5;
+     //Compute Subtotal
+     var subtotal = extended_price1 + extended_price2 + extended_price3 + extended_price4 + extended_price5;
 
-// Compute tax
-var tax_rate = 0.0575;
-var tax = tax_rate*subtotal;
+     //Compute tax
+     var tax_rate = 0.0575
+     var tax = tax_rate*subtotal;
 
-// Compute grand total 
-var total = subtotal + tax;
-
+     //Compute Grand total
+     var total = tax + subtotal;
 </script>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +55,6 @@ var total = subtotal + tax;
     <title>Invoice1</title>
 </head>
 <body>
-
     <table border="2">
         <tbody>
           <tr>
@@ -63,9 +63,9 @@ var total = subtotal + tax;
             <th style="text-align: center;" width="13%">price</th>
             <th style="text-align: center;" width="54%">extended price</th>
           </tr>
-          <script>
 
-              //Product row 1
+          <script>
+              //product 1 row
               document.write(`
           <tr>
             <td width="43%">${item1}</td>
@@ -75,7 +75,7 @@ var total = subtotal + tax;
           </tr>
           `);
 
-          //Product row 2
+          //product 2 row
           document.write(`
           <tr>
             <td width="43%">${item2}</td>
@@ -85,7 +85,7 @@ var total = subtotal + tax;
           </tr>
           `);
 
-          //Product row 3
+          //product 3 row
           document.write(`
           <tr>
             <td width="43%">${item3}</td>
@@ -95,7 +95,7 @@ var total = subtotal + tax;
           </tr>
           `);
 
-          //Product row 4
+          //product 4 row
           document.write(`
           <tr>
             <td width="43%">${item4}</td>
@@ -105,7 +105,7 @@ var total = subtotal + tax;
           </tr>
           `);
 
-          //Product row 5
+          //product 5 row
           document.write(`
           <tr>
             <td width="43%">${item5}</td>
@@ -114,30 +114,23 @@ var total = subtotal + tax;
             <td width="54%">\$${extended_price5}</td>
           </tr>
           `);
+          
         </script>
-
-<tr>
-    <td colspan="4" width="100%">&nbsp;</td>
-  </tr>
-  <tr>
-    <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
-    <td width="54%">$36.89</td>
-  </tr>
-  <tr>
-    <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Tax @ 5.75%</span></td>
-    <td width="54%">$2.12</td>
-  </tr>
-  <tr>
-    <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
-    <td width="54%"><strong>$39.01</strong></td>
-  </tr>
+            <td colspan="4" width="100%">&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
+            <td width="54%"><script>document.write(subtotal)</script></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Tax @ 5.75%</span></td>
+            <td width="54%"><script>document.write(tax.toFixed(2))</script></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
+            <td width="54%"><strong><script>document.write(total.toFixed(2))</script></strong></td>
+          </tr>
         </tbody>
       </table>
-       
-
-
-
-
-    
 </body>
 </html>
