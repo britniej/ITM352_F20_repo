@@ -1,0 +1,73 @@
+<!--Product & service page for French Paradise LLC by Britnie Roach 10/30/2020-->
+
+
+  // function making sure only valid positive quantities are used
+  //code from labs
+  function isNonNegInt(stringToCheck, returnErrors = false) {
+    errors = []; // assume no errors at first
+    if (Number(stringToCheck) != stringToCheck) errors.push('Not a number!'); // Check if string is a number value
+    if (stringToCheck < 0) errors.push('Negative value!'); // Check if it is non-negative
+    if (parseInt(stringToCheck) != stringToCheck) errors.push('Not an integer!'); // Check that it is an integer
+
+    return returnErrors ? errors : (errors.length == 0);
+  }
+
+  //code from Lab12/13 & assignemt1 examples to get text from textbox
+   function checkQuantityTextbox(theTextbox) {
+        errs = isNonNegInt(theTextbox.value, true);
+        if (errs.length == 0) errs = ['You are purchasing:'];
+        if (theTextbox.value.trim() == '') errs = ['Quantity'];
+        document.getElementById(theTextbox.name + '_label').innerHTML = errs.join(", ");
+    }
+
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <!--links external stylesheet for design-->
+  <link href="./Frenchie.css" rel="stylesheet">
+
+  <!--links stylesheet for google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Cherry+Swash|Raleway" rel="stylesheet">
+
+
+  <title>Frenchie Paradise Pet Page</title>
+</head>
+
+
+<body>
+
+
+  <header>
+
+    <div class="jumbotron">
+      <div class="container text-center">
+        <h1>Frenchie Paradise</h1>
+        <p>One stop shop for exotic French Bulldog puppies.</p>
+      </div>
+    </div>
+
+  </header>
+
+  <!-- posts selections to server data-->
+  <form name="pup_store_selection" action="/process_invoice_page" method="POST">
+
+    <main>
+
+      <!--displays pet products from linked function on server-->
+      ${display_pet_page()}
+
+
+    </main>
+    </div>
+
+    <input type="submit" name="purchase_submit_button" value="Finalize purchase!">
+
+  </form>
+</body>
+
+</html>
