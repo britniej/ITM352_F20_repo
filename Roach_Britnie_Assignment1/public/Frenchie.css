@@ -1,0 +1,141 @@
+/* style sheet for products page*/
+ /* General */
+ 
+
+ html {
+  
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: white;
+    font-size: 12px;
+  }
+  
+  body {
+    width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* title heading */  
+  h1 {
+    
+    font-family: 'Pacifico', cursive;
+    font-size: 5em;
+    margin: 0;
+    
+    text-align: center;
+  }
+  
+  
+/*prices*/
+  
+  h2 {
+    font-size: 3em;
+    font-family: 'Pacifico', cursive;
+    color: black;
+    text-align: center;
+    width: 160px;
+    position: absolute;
+    right: 4%;
+    z-index: 3000;
+    line-height: 2rem;
+    padding-top: 0.3rem;
+  }
+  
+/*title subheading*/
+  h3 {
+    font-size: 3rem;
+    color: orange;
+    text-align: center;
+    background-size: 48px 48px;
+  }
+
+  p {
+    font-size: 1.5rem;
+  }
+  
+  
+  /* block styling */
+  
+  
+  header, aside, main, footer {
+    padding: 20px;
+  }
+  
+  header {
+    border: 5px solid black;
+  }
+  
+  aside {
+    border-right: 5px solid black;
+  }
+  
+  
+  body > div {
+    border: 5px solid black;
+    display: flex;
+  }
+  
+  
+  footer {
+    border: 5px solid black;
+    align-content: center;
+  }
+  
+  footer h1 {
+    font-style: italic;
+    font-size: 3rem;
+  }
+  
+  
+  main {
+    flex: 7;
+  }
+  
+  
+  /*  Form styling */
+  
+  main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+  
+
+  
+  /* Styling the products */
+  section {
+    width: 30%;
+    margin: 5px;
+    position: relative;
+    height: 200px;
+  }
+  
+  section p {
+    color: white;
+    background: orange;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 20%;
+    box-shadow: 2px 2px 1px grey;
+    position: absolute;
+    right: 15px;
+    bottom: -6px;
+    z-index: 2000;
+  }
+  
+  
+  .pups {
+    background-size: 200px 24px;
+  }
+  
+  /* images */
+   img {
+      width: 150px;
+      height: 150px; 
+      display: list-item;
+      position: absolute;
+      bottom: 1px;
+      border: 3px solid black;      
+  }
+  
