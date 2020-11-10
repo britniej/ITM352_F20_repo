@@ -5,10 +5,12 @@
 <html lang="en">
 
 <head>
+<!--links external stylesheet for design-->
+  <link href="./Frenchie.css" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>invoice</title>
 
 </head>
 
@@ -21,45 +23,37 @@
         <th style="text-align: center;" width="13%">price</th>
         <th style="text-align: center;" width="54%">extended price</th>
       </tr>
-</tr>
+
+       </tr>
+       <!-- calls on function from server to display invoice (reference server)-->
         ${display_invoice_table_rows()}
       <tr>
         <td colspan="4" width="100%">&nbsp;</td>
       </tr>
       <tr>
-
-
-      <td colspan="4" width="100%">&nbsp;</td>
-      </tr>
-      <tr>
         <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
-        <td width="54%">
-          <script>document.write(subtotal)</script>
+        <td width="54%">$
+          ${subtotal}
         </td>
       </tr>
       <tr>
         <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Tax @
-            <script>document.write(tax_rate * 100)</script> % </span></td>
-        <td width="54%">
-          <script>document.write(tax.toFixed(2))</script>
-        </td>
+            ${(100 * tax_rate)}%</span></td>
+        <td width="54%">\$${tax.toFixed(2)}</td>
       </tr>
       <tr>
-        <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Shipping</span></td>
-        <td width="54%">
-          <script>document.write(shipping.toFixed(2))</script>
-        </td>
+        <td style="text-align: center;" colspan="3" width="67%">Shipping</span></td>
+        <td width="54%">\$${shipping.toFixed(2)}</td>
       </tr>
       <tr>
         <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
-        <td width="54%"><strong>
-            <script>document.write(total.toFixed(2))</script></strong></td>
+        <td width="54%"><strong>\$${total.toFixed(2)}</strong></td>
       </tr>
     </tbody>
   </table>
-  <div><br><b>OUR SHIPPING POLICY IS:A subtotal $0 - $49.99 will be $2 shipping
-      A subtotal $50 - $99.99 will be $5 shipping
-      Subtotals over $100 will be charged 5% of the subtotal amount</b></div>
+  <div><br><b>OUR COVID SHIPPING POLICY IS:A subtotal $0 - $1000 it will be $200 shipping<br>
+      A subtotal $1000 - $3000 will be $300 shipping.<br>
+      Subtotals over $3000 will be charged 5% of the subtotal amount</b></div>
 </body>
 
 </html>
