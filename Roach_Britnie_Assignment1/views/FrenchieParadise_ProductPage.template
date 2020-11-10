@@ -46,12 +46,8 @@
 
   <header>
 
-    <div class="jumbotron">
-      <div class="container text-center">
         <h1>Frenchie Paradise</h1>
         <h3>One stop shop for exotic French Bulldog puppies.</h3>
-      </div>
-    </div>
 
   </header>
 
@@ -60,7 +56,7 @@
 
     <main>
 
-      <!--displays pet products from linked function on server-->
+      <!--displays pet products from linked function on server using the products json data & loop (reference server)-->
       ${display_pet_page()}
 
 
@@ -68,6 +64,20 @@
     </div>
 </body>
 <footer>
+
+<style> 
+/* modifies submit button based on W3 schools*/
+ input[type=submit] {
+  background-color: orange;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: ;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+
     <input type="submit" name="purchase_submit_button" value="Finalize purchase!">
 </footer>
   </form>
