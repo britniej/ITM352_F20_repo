@@ -1,5 +1,22 @@
 <!-- registration form based off code from W3 schools-->
 
+<script>
+  //registration form validation function to catch errors and throw different error messages STILL IN PROGRESS
+function reg_validation() {
+  var message, x;
+  message = document.getElementById("email_err");
+  message.innerHTML = "";
+  x = document.getElementById("email").value;
+  try { 
+    if(x == "")  throw "empty";
+    if(isNaN(x)) throw "not a number";
+    x = Number(x);
+    if(x < 5)  throw "too low";
+    if(x > 10)   throw "too high";
+  }
+  catch(err) {
+    message.innerHTML = "Input is " + err;
+</script> 
 <!DOCTYPE html>
 <html>
 
