@@ -1,0 +1,129 @@
+/* style sheet for products/invoice page based on smartphoneproducts*/
+
+
+ /* General */
+ html {
+  
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: white;
+    font-size: 12px;
+  }
+
+  
+  /* title heading */  
+  h1 {
+    
+    font-family: 'Pacifico', cursive;
+    font-size: 5em;
+    margin: 0;
+    
+    text-align: center;
+  }
+  
+/*title subheading*/
+  h3 {
+    font-size: 3rem;
+    color: orange;
+    text-align: center;
+    background-size: 48px 48px;
+  }
+
+  p {
+    font-size: 1.5rem;
+  }
+  
+    /* block styling */
+    header, footer {
+    padding: 20px;
+  }
+  
+  header {
+    border: 5px solid black;
+  }
+  
+    
+  body {
+    width: 1200px;
+    margin: 0 auto;
+  }
+  
+  body > div {
+    border: 5px solid black;
+    display: float;
+  }
+  
+  
+  footer {
+    border: 5px solid black;
+    align-content: center;
+  }
+  
+  footer h1 {
+    font-style: italic;
+    font-size: 3rem;
+  }
+  
+
+  /*  Form styling */
+  
+  main {
+    width: 900px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+  
+
+  
+  /* Styling the products */
+  section {
+    width: 250px;
+    margin: 5px, 10px, 5px, 10px;
+    position: relative;
+    height: 200px;
+  }
+  
+  section p {
+    color: white;
+    background: orange;
+    width: 50px;
+    height: 75px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 20%;
+    box-shadow: 2px 2px 1px grey;
+    position: absolute;
+    right: 15px;
+    bottom: -6px;
+    z-index: 2000;
+  }
+  
+  /*prices*/
+  h2 {
+    font-size: 3em;
+    font-family: 'Pacifico', cursive;
+    color: black;
+    text-align: center;
+    width: 75px;
+    position: absolute;
+    right: 2%;
+    z-index: 2000;
+    line-height: 2rem;
+    padding-top: 0.3rem;
+  }
+  
+  .pups {
+    background-size: 200px 24px;
+  }
+  
+  /* images */
+  img {
+   width: 150px;
+    height: 150px; 
+    display: list-item;
+    position: absolute;
+    bottom: 10px;
+    border: 3px solid black;      
+  }
+
+  
