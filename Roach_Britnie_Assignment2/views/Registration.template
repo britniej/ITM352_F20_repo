@@ -1,0 +1,156 @@
+<!-- registration form by Britnie Roach with help from code from W3 schools for CSS & also TELUSKO youtube videos on REGEX expressions-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">//links jquery library from google for use in highlighting validatin issues with the registration form</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+  /*style based on w3 schools form css example*/
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: black;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Add padding to containers */
+    .container {
+      padding: 16px;
+      background-color: white;
+    }
+
+    /* Full-width input fields */
+    input[type=text],
+    input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    input[type=text]:focus,
+    input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    /* Overwrite default styles of hr */
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+
+    /* Set a style for the submit button */
+    .reg_submit {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+    }
+
+    .reg_submit:hover {
+      opacity: 1;
+    }
+
+    /* Add a blue text color to links */
+    a {
+      color: dodgerblue;
+    }
+
+    /* Set a grey background color and center the text of the "sign in" section */
+    .signin {
+      background-color: #f1f1f1;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <form action="/process_reg" method="POST">
+    
+    <div class="container">
+
+      <h1>Register</h1>
+      <h2>Please fill in this form to create an account.</h2>
+      <hr>
+
+      <div class="form">
+
+        <!-- pattern attribute set to regex expression that the form input has to fit or it will display the title to help user in addition to server validation-->
+
+        <label for="fname"><b>Full Name</b></label>
+        <input type="text" 
+        placeholder="Enter First and Last Name" name="fname" 
+        id="fname" 
+        pattern=".{4,30}"
+        title="Name should be 4-30 characters & only contain letters" 
+        required>
+       
+      </div>
+
+
+
+      <div class="form">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter User Name" name="uname" id="uname" pattern="[0-9a-zA-Z]{4,10}"
+          title="Username must be between 4-10 characters and contain letters and numbers only" required>
+
+      </div>
+
+        <div class="form">
+          <label for="email"><b>Email</b></label>
+        <input type="text" 
+        placeholder="Enter Email" 
+        name="email" 
+        id="email" 
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+        title="Please enter valid email address" required>
+       
+      
+        </div>
+        
+        <div class="form">
+          <label for="psw"><b>Password (Case <u>SENSITIVE</u>)</b></label>
+          <input type="password" placeholder="Enter Password" 
+          name="psw" 
+          id="psw" 
+          pattern=".{6,}"
+          title="Password must be atleast 6 characters" 
+          required>
+        </div>
+
+
+        <div class="form">
+          <label for="psw_repeat"><b>Repeat Password</b></label>
+          <input type="password" placeholder="Repeat Password" name="psw_repeat" id="psw_repeat" pattern=".{6,}"
+          title="Passwords must match & be more than 6 characters" required>
+        </div>
+
+
+        <hr>
+        <!--submit button and onsubmit event that triggers registration validation function on server before form can be submitted-->
+        <button type="submit" class="reg_submit" onsubmit="return reg_validation();">Register</button>
+      </div>
+
+      <div class="container signin">
+        <p>Already have an account? <a href="./Login.template">Sign in</a>.</p>
+      </div>
+  </form>
+
+</body>
+
+</html>
