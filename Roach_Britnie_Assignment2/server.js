@@ -12,6 +12,7 @@ const user_filename = 'user_data.json'; //links variable to json data
 var data = fs.readFileSync(user_filename, 'utf-8'); //var linked to contents of json file
 const users_reg_data = JSON.parse(data); //parse JSON to object
 app.use(myParser.urlencoded({ extended: true }));
+var username;//creates variable for personalization after login
 
 
 app.get("/petstore", function (_request, response) {
@@ -97,11 +98,11 @@ app.post("/process_reg", function (request, response) {
   var email = request.body.email;
   errors = []; //assume no errors 
 
-  function reg_validation(POST) {
+  function reg_validation() {
     // Name validation
     function fname_val(fname) {
 
-      if ((/^[a-zA-Z]{,30}/).test(fname) == false) {
+      if (fname > 30) {
         console.log("Name should be under 30 characters & only contain letters");
         return false;
       } else {
@@ -112,13 +113,14 @@ app.post("/process_reg", function (request, response) {
 
     // Username validation
     function val_uname(uname) {
-      //if (typeof users_reg_data[uname] != 'undefined') {
-      // console.log('This username is already taken');//checks that username does not exist
-      //} else
+      if (typeof users_reg_data[uname] != 'undefined') {
+      console.log('This username is already taken');//checks that username does not exist
+      } else
       //check with that username correct format 
-      if ((/^[0-9a-zA-Z]{4,30}+$/).test(uname) == false) {
+      if ((/^[0-9a-zA-Z]{4,30}$/).test(uname) == false) {
         console.log('Username must be between 4-10 characters & must contain letters and numbers only');
       } else {
+
         return true;
       }
     }
@@ -135,7 +137,8 @@ app.post("/process_reg", function (request, response) {
 
     function val_psw_repeat(psw_repeat) {
       if (psw_repeat !== psw) {
-        console.log('Password does not match initial password entry, please try again.');
+        console.log('Password does not match initial password entry, please try again.')
+        return false;
       } else {
         return true;
       }
@@ -144,12 +147,10 @@ app.post("/process_reg", function (request, response) {
 
     // Email validation
     function val_email(email) {
-      if ((/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/).test(email) == false) {
-        console.log('Please enter a valid password. Example: jane@gmail.com');
-        return false;
-      } else {
+      if ((/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/).test(email) == true) {
         return true;
-      }
+      } else {
+        console.log('Please enter a valid password. Example: jane@gmail.com');  }
     }
 
 
@@ -196,10 +197,12 @@ app.post("/process_reg", function (request, response) {
 app.post("/process_login", function (request, response, _next) {
   POST = request.body;
   console.log(quantity_data);
+  console.log(users_reg_data)
   var login_uname = request.body.uname;
   var login_psw = request.body.psw;
 
-  function login_val(_POST) {
+  function login_val(POST) {
+
     if (uname_val(login_uname) && psw_val(login_psw)) {
       return true;
     } else {
@@ -209,6 +212,7 @@ app.post("/process_login", function (request, response, _next) {
     function uname_val() {
       if (typeof users_reg_data[login_uname] != 'undefined') {
         console.log('uname success');
+        var username = request.body.uname; //links variable to username after validation
         return true;
       } else {
         console.log('uname fail');
@@ -218,7 +222,7 @@ app.post("/process_login", function (request, response, _next) {
     }
 
     function psw_val() {
-      if (login_psw === users_reg_data[login_uname].password) {
+      if (login_psw == users_reg_data[login_uname].password) {
         console.log('psw success');
         return true;
       } else {
