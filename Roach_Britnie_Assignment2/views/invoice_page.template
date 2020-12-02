@@ -1,0 +1,81 @@
+<!--Invoice display template page for French Heaven based on labs, assignment1 MVC invoice template page & invoice WODs-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>invoice</title>
+
+<style>
+/*css for invoice based off of W3 invoice tutorials*/
+
+table {
+  align: center;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: orange;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+  <table border="2">
+    <tbody>
+      <tr>
+        <th style="text-align: center;" width="40%">French Bulldog Puppy Color</th>
+        <th style="text-align: center;" width="10%">Quantity</th>
+        <th style="text-align: center;" width="35%">Price Per Puppy</th>
+        <th style="text-align: center;" width="15%">Bundle price</th>
+      </tr>
+
+       </tr>
+              <!-- calls on function from server to display invoice (reference server)-->
+
+        ${display_invoice_table_rows()}
+      <tr>
+        <td colspan="4" width="100%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
+        <td width="54%">$
+          ${subtotal}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Tax @
+            ${(100 * tax_rate)}%</span></td>
+        <td width="54%">\$${tax.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="3" width="67%">Shipping</span></td>
+        <td width="54%">\$${shipping.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
+        <td width="54%"><strong>\$${total.toFixed(2)}</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div><br><h3>OUR COVID SHIPPING POLICY IS:</h3> <br>
+      A subtotal $0 - $1000 it will be $200 shipping<br>
+      A subtotal $1000 - $3000 will be $300 shipping.<br>
+      Subtotals over $3000 will be charged 5% of the subtotal amount</b><br><br>
+      <p>If you would like one of our breeders to hand deliver your puppy and aid in surpassing any type of state specific quarentine requirements please contact us at FrenchieParadise@fakeemailserver.com to make payment and travel arrangements.</p></div>
+</body>
+
+</html>
