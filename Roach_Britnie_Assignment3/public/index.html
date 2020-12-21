@@ -1,0 +1,94 @@
+<!--Start page for French Paradise LLC by Britnie Roach 12/12/2020 with code based off Assignment 3 examaples -->
+
+<script src="./functions.js"></script>
+
+<script>
+  let params = (new URL(document.location)).searchParams;
+  if (params.has('products_key')) {
+    var products_key = params.get('product_key');
+  } else {
+    document.stop;
+  }
+  var total; //setting up total for when items are added to cart
+  products_key;
+
+
+
+  //Getting products from server through microservice based on code from DPORT Assignment 3 examples
+  var products_data;
+  loadJSON('get_products_data', function (response) {
+    // Parsing JSON string into object
+    products_data = JSON.parse(response);
+  });
+
+  // function making sure only valid positive quantities are used
+  //code based on code from labs and assignment1 examples
+  function isNonNegInt(q, return_errors = false) {
+    errors = []; // assume no errors at first
+    if (q == '') q = 0; // handle blank inputs as if they are 0
+    if (Number(q) != q) errors.push('<font color="red">Please enter number value!</font>'); // Check if string is a number value
+    else if (q < 0) errors.push('<font color="red">Please put positive number!</font>'); // Check if it is non-negative
+    else if (parseInt(q) != q) errors.push('<font color="red">Please put number value!</font>'); // Check that it is an integer
+    return return_errors ? errors : (errors.length == 0);
+  }
+
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <!--links external stylesheet for design-->
+  <link href="./Frenchie.css" rel="stylesheet">
+
+  <!--links stylesheet for google fonts-->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto+Condensed:wght@300&display=swap"
+    rel="stylesheet">
+
+
+  <title>Frenchie Paradise Pet Page</title>
+</head>
+
+
+<body>
+  <header>
+
+    <h1>Frenchie Paradise</h1>
+    <h3>One stop shop for exotic French Bulldog puppies.</h3>
+    </center>
+  </header>
+
+  <!-- posts selections to server data-->
+  <form name="pup_store_selection" action="/process_update_cart" method="POST">
+
+    <main>
+      <center>
+        <div id="nav_bar">
+          <!-- CALLS ON NAVBAR MICROSERVICE IN FUNCTIONS.JS-->
+          <script>nav_bar(products_key, products_data);</script>
+          <a href="/index.html">Home</a>
+          <a href='./login_to_cart'>Cart (<span id="cart_total"></span>)</a>
+
+
+          <!-- help from JOJO LAU with the cart total and I believe she got help from DPORT on this as well. add cart icon and div for number in cart and user name-->
+          <script>document.getElementById('cart_total').innerHTML = total;</script>
+        </div>
+        <!--Add in about me & products links-->
+
+
+
+    </main>
+    </div>
+</body>
+<footer>
+  <center>
+    
+    <h4>Please select the type of Frenchies you would like to shop for above!</h4>
+      
+  </center>
+</footer>
+</form>
+
+</html>

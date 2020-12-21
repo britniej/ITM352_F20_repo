@@ -1,0 +1,179 @@
+<!--Product & service page for French Paradise LLC by Britnie Roach 10/30/2020-->
+<script src="./functions.js"></script>
+<script>
+  var cart_data = {};
+  var products_data;
+  var products_key;
+  var total = 0;
+  var this_products_key;
+  var products;
+
+  // get the query string
+  let params = (new URL(document.location)).searchParams;
+  if (params.has('products_key')) {
+    this_products_key = params.get('products_key');
+  } else {
+    document.write('no products key in query string');
+    document.stop;
+  }
+
+  //Get products data from server microservice as discussed by DPORT in optional class
+  loadJSON('get_products_data', function (response) {
+    // Parsing JSON string into object
+    products_data = JSON.parse(response);
+  });
+
+
+  function update_cart() {
+    quantities = [];
+    products = products_data[this_products_key];
+    for (i = 0; i < products.length; i++) {
+      console.log(document.getElementById("quantity" + i).value);
+      quantities[i] = Number.parseInt(document.getElementById("quantity" + i).value);
+    }
+    console.log(quantities);
+    cart_data = {
+      "products_key": this_products_key,
+      "quantity": quantities
+    };
+
+    fetch("/process_update_cart", {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(cart_data)
+    })
+
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        document.getElementById("status_message_div").innerHTML =
+          data.status;
+      })
+  }
+
+  // Professor Port's Assignment 3 code examples: Example 1
+  loadJSON('get_cart', function (response) {
+    // Parsing JSON string into object
+    pup_cart = JSON.parse(response);
+    for (products_key in pup_cart) {
+      total += pup_cart[products_key].reduce((a, b) => a + b,0);
+    }
+  });
+  // function making sure only valid positive quantities are used
+  //code based on code from labs and assignment1 examples
+  function isNonNegInt(q, return_errors = false) {
+    errors = []; // assume no errors at first
+    if (q == '') q = 0; // handle blank inputs as if they are 0
+    if (Number(q) != q) errors.push('<font color="red">Please enter number value!</font>'); // Check if string is a number value
+    else if (q < 0) errors.push('<font color="red">Please put positive number!</font>'); // Check if it is non-negative
+    else if (parseInt(q) != q) errors.push('<font color="red">Please put number value!</font>'); // Check that it is an integer
+    return return_errors ? errors : (errors.length == 0);
+  }
+
+  //code from Lab12/13 & assignemt1 examples to get text from textbox & show errors above quantity textbox
+  function checkQuantityTextbox(theTextbox) {
+    errs = isNonNegInt(theTextbox.value, true);
+    if (errs.length == 0) errs = ['You want:'];
+    if (theTextbox.value.trim() == '') errs = ['Quantity'];
+    document.getElementById(theTextbox.name + '_label').innerHTML = errs.join(", ");
+    }
+
+
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <!--links external stylesheet for design-->
+  <link href="./Frenchie.css" rel="stylesheet">
+
+  <!--links stylesheet for google fonts-->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto+Condensed:wght@300&display=swap"
+    rel="stylesheet">
+
+
+
+  <title>Frenchie Paradise Pet Page</title>
+</head>
+
+
+<body>
+
+
+  <header>
+
+    <h1>Frenchie Paradise</h1>
+    <h3>One stop shop for exotic French Bulldog puppies.</h3>
+
+    <center><div id="nav_bar">
+      <!-- CALLS ON NAVBAR MICROSERVICE IN FUNCTIONS.JS-->
+      <script>nav_bar(this_products_key, products_data);</script>
+      <a href="/index.html">Home</a>
+      <a href='./login_to_cart'>Cart (<span id="cart_total"></span>)</a>
+     
+
+      <!-- help from JOJO LAU with the cart total and I believe she got help from DPORT on this as well. add cart icon and div for number in cart and user name-->
+      <script>document.getElementById('cart_total').innerHTML = total;</script>
+    </div>
+  </center>
+  </header>
+
+
+
+  <!-- posts selections to server data-->
+  <form name="pup_store_selection" action="/process_update_cart" method="POST">
+
+    <main>
+
+      <!--displays pet products using loop and products key-->
+      <script>
+        var products = products_data[this_products_key];
+        for (i = 0; i < products.length; i++) {
+          document.write(`
+          <section class="pups">
+              <h2>${products[i].color}</h2>
+              <p>$${products[i].price}</p>
+              <label id="quantity${i}_label"}">Quantity</label>
+              <input type="text" 
+              Value=0 
+              name="quantity${i}" 
+              id="quantity${i}"
+              onkeyup="checkQuantityTextbox(this);">
+              <img src="./images/${products[i].image}">
+              <!-- Taken from Prof. advice for Daphne Oh during optional Assignment 3 workshop, this div is a placeholder for whatever validation message is sent back from the server process_update_cart function-->
+              <div id="quantity${i}_messagediv"></div>
+          </section>
+      `);
+        }
+      </script>
+
+
+    </main>
+    </div>
+</body>
+<footer>
+
+  <style>
+    /* modifies submit button based on W3 schools*/
+    input[type=button] {
+      background-color: orange;
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-decoration: none;
+      margin: 4px 2px;
+      cursor: pointer;
+      
+    }
+  </style>
+  <!-- stops form from being submitted if it cannot be validated on the server-->
+  <center><input type="button" name="purchase_submit_button" value="Update Cart" onclick="update_cart();"></center>
+  <span id="status_message_div"></span>
+</footer>
+</form>
+
+</html>
